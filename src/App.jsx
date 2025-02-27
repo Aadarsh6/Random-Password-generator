@@ -40,10 +40,9 @@ return (
         <input type="text"
           value={password}
           readOnly
-          placeholder="Your random password"
-          className="outline-none w-full py-1 px-3 placeholder:text-gray-500"
+          className="outline-none w-full py-1 px-3"
           />
-          <button className="bg-blue-500 hover:bg-blue-400 px-4 py-2 text-orange-600 shrink-0 font-semibold text-lg">Copy</button>
+          <button className="bg-blue-600 hover:bg-blue-500 px-4 py-2 text-orange-400 shrink-0 font-bold text-lg">Copy</button>
       </div>
 
       <div className="flex gap text-sm-x-2">
