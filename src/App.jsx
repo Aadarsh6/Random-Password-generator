@@ -23,12 +23,58 @@ const passwordGenerate = useCallback(() => {
 }, [length, number, char, setPassword])
 
 
-  return <div>
-  <div>
-    <h1 className="text-4xl font-semibold mt-20 text-white text-center">Password Generator</h1>
-  </div>
-    <input type="text"  />
-  </div>
+return ( 
+  <>
+    <div className="max-w-md w-full p-4 mx-auto shadow-md my-8 text-orange-500 rounded-lg bg-gray-800 ">
+      <div className="flex justify-center">
+      <h1 className="text-3xl font-semibold mt-2 mb-8 text-orange-500">Password Generator</h1>
+      </div>
+      <div className="flex shadow-lg rounded-lg overflow-hidden mb-4">
+        <input type="text"
+          value={password}
+          readOnly
+          placeholder="Your random password"
+          className="outline-none w-full py-1 px-3 placeholder:text-gray-500"
+          />
+          <button className="bg-blue-500 hover:bg-blue-400 px-4 py-2 text-orange-600 shrink-0 font-semibold text-lg">Copy</button>
+      </div>
+
+      <div className="flex gap text-sm-x-2">
+        <div className="flex items-center gap-x-1">
+          <input type="range" 
+          min={8}
+          max={100}
+          value={length}
+          className="cursor-pointer bg-blue-500"
+          onChange={(e) => {setLength(e.target.value)}}
+          />
+          <label className="font-semibold">Length: {length}</label>
+        </div>
+
+        <div className="flex items-center gap-x-1">
+          <input type="checkbox" 
+          defaultChecked = {number}
+          id="numberInput"
+          className="cursor-pointer ml-4"
+          onChange={() => {setNumber(prev => !prev)}}
+          />
+          <label className="font-semibold">Number</label>
+        </div>
+
+        <div className="flex items-center gap-x-1">
+          <input type="checkbox" 
+          defaultChecked = {char}
+          id="numberInput"
+          className="cursor-pointer ml-4"
+          onChange={() => {setNumber(prev => !prev)}}
+          />
+          <label className="font-semibold">Character</label>
+        </div>
+      </div>
+    </div>
+  </>
+)
+
 }
 
 export default App
