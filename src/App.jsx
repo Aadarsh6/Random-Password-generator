@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 function App(){
 
@@ -14,13 +14,20 @@ const passwordGenerate = useCallback(() => {
   if(number) str+= "1234567890"
   if(char) str+= "~!@#$%^&*+?`{}()"
   
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i <= length; i++) {
     let characterIndex = Math.floor(Math.random() * str.length)
     pass += str.charAt(characterIndex) // += dds the value on the right-hand side to the value on the left-hand side and assigns the result back to the left-hand side variable.
-    setPassword(pass) 
   }
+  setPassword(pass) 
+ 
+
+
 
 }, [length, number, char, setPassword])
+
+useEffect(() => {
+  passwordGenerate()
+}, [length, char, number, passwordGenerate])
 
 
 return ( 
@@ -66,7 +73,7 @@ return (
           defaultChecked = {char}
           id="numberInput"
           className="cursor-pointer ml-4"
-          onChange={() => {setNumber(prev => !prev)}}
+          onChange={() => {setChar(prevChar => !prevChar)}}
           />
           <label className="font-semibold">Character</label>
         </div>
