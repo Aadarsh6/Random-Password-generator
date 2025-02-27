@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useCallback, useState } from "react"
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(){
 
-  return (
-    <>
-      <div className='bg-black'>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const [length, setLength] = useState(8);
+  const [number, setNumber] = useState(false);
+  const [char, setChar] = useState(false);
+  const [password, setPassword] = useState("");
+
+const passwordGenerate = useCallback(() => {
+  let pass = ''
+  
+  let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  if(number) str+= "1234567890"
+  if(char) str+= "~!@#$%^&*+?`{}()"
+  
+  for (let i = 0; i < length; i++) {
+    let characterIndex = Math.floor(Math.random() * str.length)
+    pass += str.charAt(characterIndex) // += dds the value on the right-hand side to the value on the left-hand side and assigns the result back to the left-hand side variable.
+    setPassword(pass) 
+  }
+
+}, [length, number, char, setPassword])
+
+
+  return <div>
+  <div>
+    <h1 className="text-4xl font-semibold mt-20 text-white text-center">Password Generator</h1>
+  </div>
+    <input type="text"  />
+  </div>
 }
 
 export default App
