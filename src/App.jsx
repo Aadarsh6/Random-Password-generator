@@ -64,17 +64,17 @@ return (
           className="cursor-pointer ml-4"
           onChange={() => {setNumber(prev => !prev)}}
           />
-          <label className="font-semibold">Number</label>
+          <label htmlFor="numberInput" className="font-semibold">Number</label>
         </div>
 
         <div className="flex items-center gap-x-1">
           <input type="checkbox" 
           defaultChecked = {char}
-          id="numberInput"
+          id="charInput"
           className="cursor-pointer ml-4"
           onChange={() => {setChar(prevChar => !prevChar)}}
           />
-          <label className="font-semibold">Character</label>
+          <label htmlFor="charInput" className="font-semibold">Character</label>
         </div>
       </div>
     </div>
