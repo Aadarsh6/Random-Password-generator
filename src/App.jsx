@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 function App(){
 
@@ -6,6 +6,8 @@ function App(){
   const [number, setNumber] = useState(false);
   const [char, setChar] = useState(false);
   const [password, setPassword] = useState("");
+
+  const passwordRef = useRef()
 
 const passwordGenerate = useCallback(() => {
   let pass = ''
@@ -29,7 +31,7 @@ const passwordGenerate = useCallback(() => {
       pass =  
               pass.substring(0, randomIndex) 
         + 
-        number[Math.floor(Math.random() * number.length)] 
+       
         + 
         pass.substring(randomIndex + 1);
     
@@ -59,6 +61,30 @@ useEffect(() => {
   passwordGenerate()
 }, [length, char, number, passwordGenerate])
 
+const copyPasswordToClipboard = useCallback(() => {
+  if(passwordRef.current){
+
+    const input = passwordRef.current;
+  input.select();
+  window.navigator.clipboard.writeText(password).then(()=>{
+
+/** 
+
+    In this case, you don’t need to clear the setTimeout because:
+    setTimeout runs once and clears itself automatically.
+    Unlike setInterval, which runs repeatedly, setTimeout executes once and is removed from memory.
+
+*/
+
+    setTimeout(() => {
+      input.setSelectionRange(0, 0);
+      input.blur()
+    }, 300);
+  }).catch(e => console.error("Failed to copy", e));
+}
+}, [password])
+
+
 
 return ( 
   <>
@@ -69,10 +95,13 @@ return (
       <div className="flex shadow-lg rounded-lg overflow-hidden mb-4">
         <input type="text"
           value={password}
-          readOnly
+          readOnly={true}
           className="outline-none w-full py-1 px-3"
+          ref={passwordRef}
           />
-          <button className="bg-blue-600 hover:bg-blue-500 px-4 py-2 text-orange-400 shrink-0 font-bold text-lg">Copy</button>
+          <button
+          onClick={copyPasswordToClipboard}  
+          className="bg-blue-600 hover:bg-blue-500 px-4 py-2 text-orange-400 shrink-0 font-bold text-lg">Copy</button>
       </div>
 
       <div className="flex gap text-sm-x-2">
