@@ -14,16 +14,46 @@ const passwordGenerate = useCallback(() => {
   if(number) str+= "1234567890"
   if(char) str+= "~!@#$%^&*+?`{}()"
   
-  for (let i = 0; i <= length; i++) {
+  for (let i = 0; i < length; i++) {
     let characterIndex = Math.floor(Math.random() * str.length)
     pass += str.charAt(characterIndex) // += dds the value on the right-hand side to the value on the left-hand side and assigns the result back to the left-hand side variable.
   }
+
+
+
+    // Ensure at least one number if the number checkbox is checked
+
+     if (number && !/\d/.test(pass)) {                               //console.log(/\d/.test("Hello123")); // ✅ true (contains digits)
+      let randomIndex = Math.floor(Math.random() * number.length)   //console.log(/\d/.test("NoNumbers")); // ❌ false (no digits)
+                                                                    //console.log(/\d/.test("Passw0rd")); // ✅ true (contains '0')
+      pass =  
+              pass.substring(0, randomIndex) 
+        + 
+        number[Math.floor(Math.random() * number.length)] 
+        + 
+        pass.substring(randomIndex + 1);
+    
+    }
+                                                                
+     //  Ensure at least one special character if the character checkbox is checked
+
+  if (char && !/[~!@#$%^&*+?`{}()]/.test(pass)) {
+    let randomIndex = Math.floor(Math.random() * pass.length);
+    pass =
+      pass.substring(0, randomIndex) 
+      +
+      char[Math.floor(Math.random() * char.length)] 
+      +
+      pass.substring(randomIndex + 1);
+  }
+
+
   setPassword(pass) 
  
 
 
 
-}, [length, number, char, setPassword])
+}, [length, number, char])
 
 useEffect(() => {
   passwordGenerate()
@@ -52,7 +82,7 @@ return (
           max={100}
           value={length}
           className="cursor-pointer bg-blue-500"
-          onChange={(e) => {setLength(e.target.value)}}
+          onChange={(e) => {setLength(Number(e.target.value))}}
           />
           <label className="font-semibold">Length: {length}</label>
         </div>
@@ -72,6 +102,14 @@ return (
           defaultChecked = {char}
           id="charInput"
           className="cursor-pointer ml-4"
+
+/*
+
+          Avoid onClick ❌ → Fires before state updates, can cause inconsistencies (Fire as soon as it is clcked and does not wait for the state to update).
+          Use onChange ✅ → Fires after the state update, works reliably (Fires only when the state changes).
+
+ */
+
           onChange={() => {setChar(prevChar => !prevChar)}}
           />
           <label htmlFor="charInput" className="font-semibold">Character</label>
