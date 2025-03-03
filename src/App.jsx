@@ -10,7 +10,7 @@ function App(){
   const passwordRef = useRef()
 
 const passwordGenerate = useCallback(() => {
-  let pass = ''
+  let pass = ""
   
   let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
   if(number) str+= "1234567890"
@@ -18,7 +18,7 @@ const passwordGenerate = useCallback(() => {
   
   for (let i = 0; i < length; i++) {
     let characterIndex = Math.floor(Math.random() * str.length)
-    pass += str.charAt(characterIndex) // += dds the value on the right-hand side to the value on the left-hand side and assigns the result back to the left-hand side variable.
+    pass += str.charAt(characterIndex) // += adds the value on the right-hand side to the value on the left-hand side and assigns the result back to the left-hand side variable.
   }
 
 
@@ -69,11 +69,9 @@ const copyPasswordToClipboard = useCallback(() => {
   window.navigator.clipboard.writeText(password).then(()=>{
 
 /** 
-
     In this case, you don’t need to clear the setTimeout because:
     setTimeout runs once and clears itself automatically.
     Unlike setInterval, which runs repeatedly, setTimeout executes once and is removed from memory.
-
 */
 
     setTimeout(() => {
@@ -87,7 +85,7 @@ const copyPasswordToClipboard = useCallback(() => {
 
 
 return ( 
-  <>
+  <div className="w-full h-screen flex items-center justify-center bg-black">
     <div className="max-w-md w-full p-4 mx-auto shadow-md my-8 text-orange-500 rounded-lg bg-gray-800 ">
       <div className="flex justify-center">
       <h1 className="text-3xl font-semibold mt-2 mb-8 text-orange-500">Password Generator</h1>
@@ -133,10 +131,8 @@ return (
           className="cursor-pointer ml-4"
 
 /*
-
           Avoid onClick ❌ → Fires before state updates, can cause inconsistencies (Fire as soon as it is clcked and does not wait for the state to update).
           Use onChange ✅ → Fires after the state update, works reliably (Fires only when the state changes).
-
  */
 
           onChange={() => {setChar(prevChar => !prevChar)}}
@@ -145,7 +141,7 @@ return (
         </div>
       </div>
     </div>
-  </>
+  </div>
 )
 
 }
