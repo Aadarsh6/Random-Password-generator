@@ -128,8 +128,9 @@ return (
           checked={number}
           onChange={() => setNumber((prev) => !prev)}
           className="cursor-pointer accent-[#38bdf8]"
+          id="Num"
         />
-        <label className="text-lg font-semibold">Include Numbers</label>
+        <label htmlFor="Num" className="text-lg font-semibold">Include Numbers</label>
       </div>
 
       {/*
@@ -144,8 +145,9 @@ return (
           checked={char}
           onChange={() => setChar((prev) => !prev)}
           className="cursor-pointer accent-[#38bdf8]"
+          id="char"
         />
-        <label className="text-lg font-semibold">Include Special Characters</label>
+        <label htmlFor="char" className="text-lg font-semibold">Include Special Characters</label>
       </div>
     </div>
   </div>
