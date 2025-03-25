@@ -13,7 +13,13 @@ const passwordGenerate = useCallback(() => {
   let pass = ""
   
   let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-  if(number) str+= "1234567890"
+  if(number) str+= "1234567890"  //x += y;  // Same as: x = x + y;
+
+/*let num = 10;
+num += 5;  // Same as: num = num + 5;
+console.log(num); // Output: 15
+ */
+
   if(char) str+= "~!@#$%^&*+?`{}()"
   
   for (let i = 0; i < length; i++) {
